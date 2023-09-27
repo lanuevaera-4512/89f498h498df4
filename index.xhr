@@ -1,0 +1,12 @@
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/my/image/file.png', true);
+xhr.responseType = 'arraybuffer'; // this will accept the response as an ArrayBuffer
+xhr.onload = function(buffer) {
+    var words = new Uint32Array(buffer),
+        hex = '';
+    for (var i = 0; i < words.length; i++) {
+      hex += words.get(i).toString(16);  // this will convert it to a 4byte hex string
+    }
+    console.log(hex);
+};
+xhr.send();
